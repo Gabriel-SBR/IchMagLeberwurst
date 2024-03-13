@@ -74,7 +74,7 @@ def fit(X, y):
 
     # Gradient descent algorithm 
 
-    learning_rate = 0.02  # This is a hyperparameter you'll need to choose
+    learning_rate = 0.01  # This is a hyperparameter you'll need to choose
     max_iter = 1000  # Another hyperparameter
     for i in range(max_iter):
         # Compute the loss (optional: only if you want to monitor it)
@@ -87,7 +87,7 @@ def fit(X, y):
         w -= learning_rate * gradient
 
         # Optional: Print the loss every 100 iterations (or any number of your choice)
-        if i % 200 == 0 or i == 1999:
+        if i % 100 == 0 or i == 999:
             print(f"Iteration {i}, Loss: {loss}")
 
 
