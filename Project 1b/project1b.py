@@ -58,6 +58,17 @@ def fit(X, y):
     w = np.zeros((21,))
     X_transformed = transform_data(X)
     # TODO: Enter your code here
+
+    # Calculate Squared Loss
+
+    # Compute the gradient of the loss with respect to w
+
+    # Gradient descent algorithm 
+
+    # While loop
+
+
+
     assert w.shape == (21,)
     return w
 

@@ -12,3 +12,5 @@ print("Vector sin_x: \n",sin_x)
 exp_x = np.exp(x)
 
 print("Vector exp_x: \n",exp_x)
+
+x_squared = np.square(x)
