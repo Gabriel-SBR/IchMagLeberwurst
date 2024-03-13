@@ -28,8 +28,14 @@ def transform_data(X):
     """
     X_transformed = np.zeros((700, 21))
     # TODO: Enter your code here
+    X_linear = X
+    X_quadratic = np.square(X)
+    X_exponential = np.exp(X)
+    X_cosine = np.cos(X)
+    X_constant = np.ones((700, 1))
 
-
+    #creating X matrix, dim = (700,21)
+    X_transformed = np.concatenate((X_linear,X_quadratic, X_exponential, X_cosine, X_constant), axis = 1)
     
     assert X_transformed.shape == (700, 21)
     return X_transformed
@@ -52,6 +58,39 @@ def fit(X, y):
     w = np.zeros((21,))
     X_transformed = transform_data(X)
     # TODO: Enter your code here
+
+    # Calculate Squared Loss calculate this both with using the max. norm and the mean error approach 
+    #and see what performs better. I will to the mean error fist
+    def compute_loss(w, X, y):
+        prediction = X @ w
+        loss = np.mean((prediction - y) ** 2)
+        return loss
+    
+    # Compute the gradient of the loss with respect to w
+    def compute_gradient(w, X, y):
+        prediction = X @ w
+        gradient = 2 * X.T @ (prediction - y) / X.shape[0]
+        return gradient
+
+    # Gradient descent algorithm 
+
+    learning_rate = 0.02  # This is a hyperparameter you'll need to choose
+    max_iter = 1000  # Another hyperparameter
+    for i in range(max_iter):
+        # Compute the loss (optional: only if you want to monitor it)
+        loss = compute_loss(w, X_transformed, y)
+
+        # Compute the gradient
+        gradient = compute_gradient(w, X_transformed, y)
+
+        # Update the weights
+        w -= learning_rate * gradient
+
+        # Optional: Print the loss every 100 iterations (or any number of your choice)
+        if i % 200 == 0 or i == 1999:
+            print(f"Iteration {i}, Loss: {loss}")
+
+
     assert w.shape == (21,)
     return w
 
