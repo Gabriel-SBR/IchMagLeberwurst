@@ -60,7 +60,7 @@ def fit(X, y):
     # TODO: Enter your code here
 
     # Calculate Squared Loss
-
+    a = np.array([1])
     # Compute the gradient of the loss with respect to w
 
     # Gradient descent algorithm 
