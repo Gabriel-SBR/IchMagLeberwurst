@@ -72,7 +72,7 @@ def fit(X, y):
         gradient = 2 * X.T @ (prediction - y) / X.shape[0]
         return gradient
 
-    # Gradient descent algorithm 
+    # Gradient descent algorithm 123
 
     learning_rate = 0.01  # This is a hyperparameter you'll need to choose
     max_iter = 1000  # Another hyperparameter
