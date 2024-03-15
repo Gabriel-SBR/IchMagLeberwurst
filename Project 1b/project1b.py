@@ -67,6 +67,7 @@ def fit(X, y):
 
     # While loop
 
+    #hhhh
 
 
     assert w.shape == (21,)
