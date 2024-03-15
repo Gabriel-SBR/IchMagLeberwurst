@@ -69,7 +69,7 @@ def fit(X, y):
 
     #hhhh
 
-
+     # asdhj
     assert w.shape == (21,)
     return w
 
