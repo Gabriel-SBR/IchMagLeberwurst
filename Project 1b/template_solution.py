@@ -63,8 +63,7 @@ def fit(X, y):
     #and see what performs better. I will to the mean error fist
     def compute_loss(w, X, y):
         prediction = X @ w
-        rigid_coef = 0.0001
-        loss = np.mean((prediction - y) ** 2) + rigid_coef * (np.linalg.norm(w) ** 2)
+        loss = np.sqrt(np.mean((prediction - y) ** 2))
         return loss
     
     # Compute the gradient of the loss with respect to w
@@ -99,7 +98,7 @@ def fit(X, y):
 # Main function. You don't have to change this
 if __name__ == "__main__":
     # Data loading
-    data = pd.read_csv("train.csv")
+    data = pd.read_csv("Project 1b/train.csv")
     y = data["y"].to_numpy()
     data = data.drop(columns=["Id", "y"])
     # print a few data samples
