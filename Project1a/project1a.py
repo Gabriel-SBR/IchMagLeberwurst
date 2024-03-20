@@ -52,7 +52,10 @@ def calculate_RMSE(w, X, y):
     # TODO: Enter your code here
     v = X @ w
 
-    print(v.shape)
+    #print(v.shape)
+
+    #print("y: ", y)
+    #print("v: ", v)
 
     RMSE = np.sqrt(np.mean(np.square(y-v)))
 
@@ -77,6 +80,7 @@ def average_LR_RMSE(X, y, lambdas, n_folds):
     avg_RMSE: array of floats: dim = (5,), average RMSE value for every lambda
     """
     RMSE_mat = np.zeros((n_folds, len(lambdas)))
+    
 
     # TODO: Enter your code here. Hint: Use functions 'fit' and 'calculate_RMSE' with training and test data
     # and fill all entries in the matrix 'RMSE_mat'
@@ -89,11 +93,13 @@ def average_LR_RMSE(X, y, lambdas, n_folds):
             X_train = X[train_index]
             y_train = y[train_index]
             X_test = X[test_index]
-            y_test = X[test_index]
+            y_test = y[test_index]
 
             w = fit(X_train, y_train, lambdas[k])
 
-            RMSE_mat[k,i] = calculate_RMSE(w,X_test,y_test)  # not sure with i and k
+            RMSE_mat[i,k] = calculate_RMSE(w,X_test,y_test)  # not sure with i and k
+        
+        
         
 
     avg_RMSE = np.mean(RMSE_mat, axis=0)
@@ -116,4 +122,4 @@ if __name__ == "__main__":
     n_folds = 10
     avg_RMSE = average_LR_RMSE(X, y, lambdas, n_folds)
     # Save results in the required format
-    np.savetxt("./results.csv", avg_RMSE, fmt="%.12f")
+    np.savetxt("./Project1a/results.csv", avg_RMSE, fmt="%.12f")
