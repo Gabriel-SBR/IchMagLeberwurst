@@ -110,7 +110,7 @@ def average_LR_RMSE(X, y, lambdas, n_folds):
 # Main function. You don't have to change this
 if __name__ == "__main__":
     # Data loading
-    data = pd.read_csv("Project1a/train.csv")
+    data = pd.read_csv("train.csv")
     y = data["y"].to_numpy()
     data = data.drop(columns="y")
     # print a few data samples
@@ -122,4 +122,4 @@ if __name__ == "__main__":
     n_folds = 10
     avg_RMSE = average_LR_RMSE(X, y, lambdas, n_folds)
     # Save results in the required format
-    np.savetxt("./Project1a/results.csv", avg_RMSE, fmt="%.12f")
+    np.savetxt("./results.csv", avg_RMSE, fmt="%.12f")
