@@ -63,7 +63,8 @@ def fit(X, y):
     #and see what performs better. I will to the mean error fist
     def compute_loss(w, X, y):
         prediction = X @ w
-        loss = np.mean((prediction - y) ** 2)
+        rigid_coef = 0.0001
+        loss = np.mean((prediction - y) ** 2) + rigid_coef * (np.linalg.norm(w) ** 2)
         return loss
     
     # Compute the gradient of the loss with respect to w
@@ -72,12 +73,12 @@ def fit(X, y):
         gradient = 2 * X.T @ (prediction - y) / X.shape[0]
         return gradient
 
-    # Gradient descent algorithm 123
+    # Gradient descent algorithm
 
     learning_rate = 0.01  # This is a hyperparameter you'll need to choose
     max_iter = 1000  # Another hyperparameter
     for i in range(max_iter):
-        # Compute the loss (optional: only if you want to monitor it)
+        # Compute the loss
         loss = compute_loss(w, X_transformed, y)
 
         # Compute the gradient
@@ -86,7 +87,7 @@ def fit(X, y):
         # Update the weights
         w -= learning_rate * gradient
 
-        # Optional: Print the loss every 100 iterations (or any number of your choice)
+        # Print the loss every 100 iterations (or any number of your choice)
         if i % 100 == 0 or i == 999:
             print(f"Iteration {i}, Loss: {loss}")
 
