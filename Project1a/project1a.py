@@ -50,14 +50,9 @@ def calculate_RMSE(w, X, y):
     """
     RMSE = 0
     # TODO: Enter your code here
-    v = X @ w
+    prediction = X @ w # Compute the prediction 
 
-    #print(v.shape)
-
-    #print("y: ", y)
-    #print("v: ", v)
-
-    RMSE = np.sqrt(np.mean(np.square(y-v)))
+    RMSE = np.sqrt(np.mean(np.square(y-prediction))) # Compute the Root Mean Squared Error 
 
     assert np.isscalar(RMSE)
     return RMSE
@@ -79,27 +74,27 @@ def average_LR_RMSE(X, y, lambdas, n_folds):
     ----------
     avg_RMSE: array of floats: dim = (5,), average RMSE value for every lambda
     """
-    RMSE_mat = np.zeros((n_folds, len(lambdas)))
+    RMSE_mat = np.zeros((n_folds, len(lambdas))) # The lambdas represent the columns and the rows represent the folds
     
-
     # TODO: Enter your code here. Hint: Use functions 'fit' and 'calculate_RMSE' with training and test data
     # and fill all entries in the matrix 'RMSE_mat'
     kf=KFold(n_splits = n_folds, shuffle=True, random_state=42)
     kf.get_n_splits(X,y)
     
-    for k in range(len(lambdas)):
-        for i, (train_index, test_index) in enumerate(kf.split(X,y)):
+    for k in range(len(lambdas)): # k iterates over the lambdas
+        for i, (train_index, test_index) in enumerate(kf.split(X,y)): # i iterates over the folds
             
-            X_train = X[train_index]
+            # train_index and test_index are array with the indeces of the current rows of X and y 
+            # that are used for training and testing in the current fold
+
+            X_train = X[train_index] 
             y_train = y[train_index]
             X_test = X[test_index]
             y_test = y[test_index]
 
             w = fit(X_train, y_train, lambdas[k])
 
-            RMSE_mat[i,k] = calculate_RMSE(w,X_test,y_test)  # not sure with i and k
-        
-        
+            RMSE_mat[i,k] = calculate_RMSE(w,X_test,y_test)  # Compute the RMSE for the current fold and lambda
         
 
     avg_RMSE = np.mean(RMSE_mat, axis=0)

@@ -3,6 +3,7 @@
 # First, we import necessary libraries:
 import numpy as np
 import pandas as pd
+import sklearn
 
 # Add any additional imports here (however, the task is solvable without using 
 # any additional imports)
@@ -61,35 +62,8 @@ def fit(X, y):
 
     # Calculate Squared Loss calculate this both with using the max. norm and the mean error approach 
     #and see what performs better. I will to the mean error fist
-    def compute_loss(w, X, y):
-        prediction = X @ w
-        loss = np.mean((prediction - y) ** 2)
-        return loss
+
     
-    # Compute the gradient of the loss with respect to w
-    def compute_gradient(w, X, y):
-        prediction = X @ w
-        gradient = 2 * X.T @ (prediction - y) / X.shape[0]
-        return gradient
-
-    # Gradient descent algorithm 
-
-    learning_rate = 0.01  # This is a hyperparameter you'll need to choose
-    max_iter = 1000  # Another hyperparameter
-    for i in range(max_iter):
-        # Compute the loss (optional: only if you want to monitor it)
-        loss = compute_loss(w, X_transformed, y)
-
-        # Compute the gradient
-        gradient = compute_gradient(w, X_transformed, y)
-
-        # Update the weights
-        w -= learning_rate * gradient
-
-        # Optional: Print the loss every 100 iterations (or any number of your choice)
-        if i % 100 == 0 or i == 999:
-            print(f"Iteration {i}, Loss: {loss}")
-
 
     assert w.shape == (21,)
     return w
