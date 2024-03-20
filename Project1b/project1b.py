@@ -8,6 +8,8 @@ import pandas as pd
 # any additional imports)
 # import ...
 
+from sklearn.linear_model import SGDRegressor
+
 def transform_data(X):
     """
     This function transforms the 5 input features of matrix X (x_i denoting the i-th component of X) 
@@ -59,17 +61,12 @@ def fit(X, y):
     X_transformed = transform_data(X)
     # TODO: Enter your code here
 
-    # Calculate Squared Loss
-    a = np.array([1])
-    # Compute the gradient of the loss with respect to w
+    model = SGDRegressor(loss="squared_epsilon_insensitive", alpha=0.001)
 
-    # Gradient descent algorithm 
+    model.fit(X_transformed,y)
 
-    # While loop
+    w = model.coef_
 
-    #hhhh
-
-     # asdhj
     assert w.shape == (21,)
     return w
 
