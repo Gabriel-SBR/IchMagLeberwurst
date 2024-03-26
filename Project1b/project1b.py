@@ -61,7 +61,7 @@ def fit(X, y):
     X_transformed = transform_data(X)
     # TODO: Enter your code here
 
-    model = SGDRegressor(loss="squared_epsilon_insensitive", alpha=0.001)
+    model = SGDRegressor(loss="squared_epsilon_insensitive", alpha=0.0001)
 
     model.fit(X_transformed,y)
 
